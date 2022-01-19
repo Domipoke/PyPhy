@@ -1,6 +1,8 @@
 import math
 from time import sleep
-import turtle
+import pygeom.vector as v
+from pygeom import Axes, Point
+import pygeom.vector as v
 
 
 class Vector2D():
@@ -9,6 +11,8 @@ class Vector2D():
     #-0+  <- This is x
     # -      a is the angle between x and vector
     def __init__(self,x,a) -> None:
+        self.apx = 0
+        self.apy = 0
         self.x = x
         self.a = a
         self.v = self.x * math.cos(math.radians(a))
@@ -40,14 +44,18 @@ class Vector2D():
             t = 270-math.atan(abs(y)/abs(x))
         return Vector2D(x,t)
 
-    def draw(self,c):
-        t=turtle.Turtle() 
-        s=1
-        
-        #Draw Plane
-        t.penup()
-        t.goto()
-        t.screen.window_height()/2
-        t.screen.window_width()/2
+    def setAp(self,x,y):
+        self.apx = x
+        self.apy = y   
         
 
+    def draw(self):
+        self.p1 = Point(self.apx,self.apy,color="gray")
+        self.p2 = Point(self.x,self.y,color="gray")
+
+        
+        return v.Vector(
+                p1=self.p1,
+                p2=self.p2,
+                head_width  = 0.25,
+                head_length = 0.3)
